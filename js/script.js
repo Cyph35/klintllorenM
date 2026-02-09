@@ -498,6 +498,52 @@ function initAchievementsExpand() {
 }
 
 // ==========================================
+// PROFILE PICTURE HOVER EFFECT
+// ==========================================
+
+function initProfilePicture() {
+    const profilePicture = document.getElementById('profilePicture');
+    const profileImages = profilePicture.querySelectorAll('.profile-img');
+
+    if (profilePicture && profileImages.length === 2) {
+        const firstImage = profileImages[0];
+        const secondImage = profileImages[1];
+
+        profilePicture.addEventListener('mouseenter', () => {
+            firstImage.classList.add('profile-img--hidden');
+            secondImage.classList.remove('profile-img--hidden');
+        });
+
+        profilePicture.addEventListener('mouseleave', () => {
+            firstImage.classList.remove('profile-img--hidden');
+            secondImage.classList.add('profile-img--hidden');
+        });
+
+        profilePicture.addEventListener('mousedown', () => {
+            firstImage.classList.add('profile-img--hidden');
+            secondImage.classList.remove('profile-img--hidden');
+        });
+
+        profilePicture.addEventListener('mouseup', () => {
+            firstImage.classList.remove('profile-img--hidden');
+            secondImage.classList.add('profile-img--hidden');
+        });
+
+        // Touch support for mobile devices
+        profilePicture.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevent default touch behavior
+            firstImage.classList.add('profile-img--hidden');
+            secondImage.classList.remove('profile-img--hidden');
+        }, { passive: false });
+
+        profilePicture.addEventListener('touchend', () => {
+            firstImage.classList.remove('profile-img--hidden');
+            secondImage.classList.add('profile-img--hidden');
+        });
+    }
+}
+
+// ==========================================
 // INITIALIZE ALL FEATURES
 // ==========================================
 
@@ -515,7 +561,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initResumeCVTabs();
     initCVAccordions();
     initAchievementsExpand();
+    initProfilePicture();
     
     console.log('Portfolio initialized! 🚀');
 });
-
